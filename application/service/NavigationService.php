@@ -645,22 +645,22 @@ class NavigationService
                 'url'       =>  MyUrl('index/safety/loginpwdinfo'),
                 'type'      =>  'loginpwd',
             ],
-            [
-                'title'     =>  '手机号码',
-                'no_msg'    =>  '您还没有绑定手机号码',
-                'ok_msg'    =>  '已绑定手机 #accounts#',
-                'tips'      =>  '可用于登录，密码找回，账户安全管理校验，接受账户提醒通知。',
-                'url'       =>  MyUrl('index/safety/mobileinfo'),
-                'type'      =>  'mobile',
-            ],
-            [
-                'title'     =>  '电子邮箱',
-                'no_msg'    =>  '您还没有绑定电子邮箱',
-                'ok_msg'    =>  '已绑定电子邮箱 #accounts#',
-                'tips'      =>  '可用于登录，密码找回，账户安全管理校验，接受账户提醒邮件。',
-                'url'       =>  MyUrl('index/safety/emailinfo'),
-                'type'      =>  'email',
-            ],
+//            [
+//                'title'     =>  '手机号码',
+//                'no_msg'    =>  '您还没有绑定手机号码',
+//                'ok_msg'    =>  '已绑定手机 #accounts#',
+//                'tips'      =>  '可用于登录，密码找回，账户安全管理校验，接受账户提醒通知。',
+//                'url'       =>  MyUrl('index/safety/mobileinfo'),
+//                'type'      =>  'mobile',
+//            ],
+//            [
+//                'title'     =>  '电子邮箱',
+//                'no_msg'    =>  '您还没有绑定电子邮箱',
+//                'ok_msg'    =>  '已绑定电子邮箱 #accounts#',
+//                'tips'      =>  '可用于登录，密码找回，账户安全管理校验，接受账户提醒邮件。',
+//                'url'       =>  MyUrl('index/safety/emailinfo'),
+//                'type'      =>  'email',
+//            ],
         ];
 
         // 用户安全项列表钩子
