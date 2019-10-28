@@ -519,12 +519,12 @@ class NavigationService
                 'is_login'  => 1,
                 'badge'     => null,
                 'icon'      => 'am-icon-cube',
-                'url'       => '',
+                'url'       => 'shop.php',//原来为空
                 'items'     => [
-                    [
-                        'name'  => '我的订单',
-                        'url'   => MyUrl('index/order/index'),
-                    ],
+//                    [
+//                        'name'  => '我的订单',
+//                        'url'   => MyUrl('index/order/index'),
+//                    ],
                 ],
             ],
             [
@@ -540,14 +540,14 @@ class NavigationService
                     ],
                 ],
             ],
-            [
-                'name'      => '购物车',
-                'is_login'  => 1,
-                'badge'     => $common_cart_total,
-                'icon'      => 'am-icon-shopping-cart',
-                'url'       => MyUrl('index/cart/index'),
-                'items'     => [],
-            ],
+//            [//关闭购物车
+//                'name'      => '购物车',
+//                'is_login'  => 1,
+//                'badge'     => $common_cart_total,
+//                'icon'      => 'am-icon-shopping-cart',
+//                'url'       => MyUrl('index/cart/index'),
+//                'items'     => [],
+//            ],
             [
                 'name'      => '消息',
                 'is_login'  => 1,
