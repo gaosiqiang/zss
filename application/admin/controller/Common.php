@@ -144,8 +144,8 @@ class Common extends Controller
      */
 	private function ExLogin()
     {
-        if (isset($_SESSION['shopxo']['user']) && $_SESSION['shopxo']['user']) {
-            $user = UserService::UserInfo('id', $_SESSION['shopxo']['user']['id']);
+        if (isset($_SESSION[config()['session']['prefix']]['user']) && $_SESSION[config()['session']['prefix']]['user']) {
+            $user = UserService::UserInfo('id', $_SESSION[config()['session']['prefix']]['user']['id']);
             return (new AdminService())->ExLoginByUserEmail($user['email']);
         }
         return ['code' => -1];
