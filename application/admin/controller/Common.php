@@ -133,7 +133,7 @@ class Common extends Controller
 				exit(json_encode(DataReturn('登录失效，请重新登录', -400)));
 			} else {
 //				die('<script type="text/javascript">if(self.frameElement && self.frameElement.tagName == "IFRAME"){parent.location.reload();}else{window.location.href="'.MyUrl('admin/admin/logininfo').'";}</script>');
-				die('<script type="text/javascript">alert("请联系管理员");window.location.href = "index.php";</script>');
+				die('<script type="text/javascript">alert("请联系管理员，'.$login_info['msg'].'");window.location.href = "index.php";</script>');
 			}
 		}
 		return;
