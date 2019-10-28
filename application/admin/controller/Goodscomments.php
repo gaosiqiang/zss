@@ -10,7 +10,9 @@
 // +----------------------------------------------------------------------
 namespace app\admin\controller;
 
+use app\service\BrandService;
 use app\service\GoodsCommentsService;
+use app\service\GoodsService;
 
 /**
  * 商品评论管理
@@ -57,6 +59,11 @@ class Goodscomments extends Common
 
         // 条件
         $where = GoodsCommentsService::GoodsCommentsListWhere($params);
+
+        //获取该商户所有品牌id集合
+        $goods_ids = GoodsService::getGoodsIdsByMerchantId(intval(session('admin')['merchant_id']));
+        //添加条件组合
+        $where[] = ['goods_id', 'in', $goods_ids];
 
         // 获取总数
         $total = GoodsCommentsService::GoodsCommentsTotal($where);
