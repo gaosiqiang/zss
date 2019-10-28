@@ -10,6 +10,7 @@
 // +----------------------------------------------------------------------
 namespace app\admin\controller;
 
+use app\service\OrderService;
 use app\service\StatisticalService;
 
 /**
@@ -58,17 +59,22 @@ class Index extends Common
 	 */
 	public function Init()
 	{
-		// 系统信息
-		$mysql_ver = db()->query('SELECT VERSION() AS `ver`');
+	    // 系统信息
+//		$mysql_ver = db()->query('SELECT VERSION() AS `ver`');
 		$data = array(
 				'server_ver'	=>	php_sapi_name(),
 				'php_ver'		=>	PHP_VERSION,
-				'mysql_ver'		=>	isset($mysql_ver[0]['ver']) ? $mysql_ver[0]['ver'] : '',
+				'mysql_ver'		=>	isset($mysql_ver[0]['ver']) ? '5.6' : '5.6',
 				'os_ver'		=>	PHP_OS,
 				'host'			=>	isset($_SERVER["HTTP_HOST"]) ? $_SERVER["HTTP_HOST"] : '',
-				'ver'			=>	'ShopXO'.' '.APPLICATION_VERSION,
+				'ver'			=>	'中书省'.' '.APPLICATION_VERSION,
 			);
 		$this->assign('data', $data);
+
+        //获取该商户所有订单id集合
+        $order_ids = $order_ids = OrderService::getOrderIdsByMerchantId(intval(session('admin')['merchant_id']));
+
+        $GLOBALS['order_ids'] = $order_ids;
 
 		// 用户
 		$user = StatisticalService::UserYesterdayTodayTotal();

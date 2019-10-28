@@ -162,10 +162,11 @@ class StatisticalService
 
         // 订单状态
         // （0待确认, 1已确认/待支付, 2已支付/待发货, 3已发货/待收货, 4已完成, 5已取消, 6已关闭）
-        
+
         // 总数
         $where = [
             ['status', '<=', 4],
+            ['id', 'in', $GLOBALS['order_ids']],
         ];
         $total_count = Db::name('Order')->where($where)->count();
 
@@ -174,6 +175,7 @@ class StatisticalService
             ['status', '<=', 4],
             ['add_time', '>=', self::$yesterday_time_start],
             ['add_time', '<=', self::$yesterday_time_end],
+            ['id', 'in', $GLOBALS['order_ids']],
         ];
         $yesterday_count = Db::name('Order')->where($where)->count();
 
@@ -182,6 +184,7 @@ class StatisticalService
             ['status', '<=', 4],
             ['add_time', '>=', self::$today_time_start],
             ['add_time', '<=', self::$today_time_end],
+            ['id', 'in', $GLOBALS['order_ids']],
         ];
         $today_count = Db::name('Order')->where($where)->count();
 
@@ -213,6 +216,7 @@ class StatisticalService
         // 总数
         $where = [
             ['status', '=', 4],
+            ['id', 'in', $GLOBALS['order_ids']],
         ];
         $total_count = Db::name('Order')->where($where)->count();
 
@@ -221,6 +225,7 @@ class StatisticalService
             ['status', '=', 4],
             ['add_time', '>=', self::$yesterday_time_start],
             ['add_time', '<=', self::$yesterday_time_end],
+            ['id', 'in', $GLOBALS['order_ids']],
         ];
         $yesterday_count = Db::name('Order')->where($where)->count();
 
@@ -229,6 +234,7 @@ class StatisticalService
             ['status', '=', 4],
             ['add_time', '>=', self::$today_time_start],
             ['add_time', '<=', self::$today_time_end],
+            ['id', 'in', $GLOBALS['order_ids']],
         ];
         $today_count = Db::name('Order')->where($where)->count();
 
@@ -260,6 +266,7 @@ class StatisticalService
         // 总数
         $where = [
             ['status', '<=', 4],
+            ['id', 'in', $GLOBALS['order_ids']],
         ];
         $total_count = Db::name('Order')->where($where)->sum('total_price');
 
@@ -268,6 +275,7 @@ class StatisticalService
             ['status', '<=', 4],
             ['add_time', '>=', self::$yesterday_time_start],
             ['add_time', '<=', self::$yesterday_time_end],
+            ['id', 'in', $GLOBALS['order_ids']],
         ];
         $yesterday_count = Db::name('Order')->where($where)->sum('total_price');
 
@@ -276,6 +284,7 @@ class StatisticalService
             ['status', '<=', 4],
             ['add_time', '>=', self::$today_time_start],
             ['add_time', '<=', self::$today_time_end],
+            ['id', 'in', $GLOBALS['order_ids']],
         ];
         $today_count = Db::name('Order')->where($where)->sum('total_price');
 
@@ -324,6 +333,7 @@ class StatisticalService
                         ['status', '=', $status],
                         ['add_time', '>=', $day['start_time']],
                         ['add_time', '<=', $day['end_time']],
+                        ['id', 'in', $GLOBALS['order_ids']],
                     ];
                     $count_arr[$status][] = Db::name('Order')->where($where)->count();
                 }
@@ -389,6 +399,7 @@ class StatisticalService
                         ['payment_name', '=', $payment],
                         ['add_time', '>=', $day['start_time']],
                         ['add_time', '<=', $day['end_time']],
+                        ['order_id', 'in', $GLOBALS['order_ids']],
                     ];
                     $count_arr[$payment][] = Db::name('PayLog')->where($where)->count();
                 }
@@ -434,6 +445,7 @@ class StatisticalService
             ['status', '<=', 4],
             ['add_time', '>=', self::$thirty_time_start],
             ['add_time', '<=', self::$thirty_time_end],
+            ['id', 'in', $GLOBALS['order_ids']],
         ];
         $order_ids = Db::name('Order')->where($where)->column('id');
 
