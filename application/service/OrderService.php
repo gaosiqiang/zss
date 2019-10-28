@@ -1461,5 +1461,23 @@ class OrderService
         return DataReturn('支付中', -300);
     }
 
+    /**
+     * 获取商户订单id集合
+     * @param int $merchant_id
+     * @return array
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
+     */
+    public static function getOrderIdsByMerchantId(int $merchant_id)
+    {
+        $goods_ids = GoodsService::getGoodsIdsByMerchantId($merchant_id);
+        $data = Db::name('order_detail')->where('goods_id', 'in', $goods_ids)->column('order_id');
+        foreach ($data as $value) {
+            $return[] = (int) $value;
+        }
+        return $return;
+    }
+
 }
 ?>
