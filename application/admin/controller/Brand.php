@@ -10,6 +10,7 @@
 // +----------------------------------------------------------------------
 namespace app\admin\controller;
 
+use app\service\MerchantService;
 use think\facade\Hook;
 use app\service\BrandService;
 
@@ -58,6 +59,11 @@ class Brand extends Common
 
         // 条件
         $where = BrandService::BrandListWhere($params);
+
+        //获取当前admin所属商户id
+        //$merchant_admin = (new MerchantService())->getMerchantByAdminId($_SESSION[config()['session']['prefix']]['admin']['id']);
+        //$where[] = ['merchant_id', '=', $merchant_admin['data']['merchant_id']];
+        $where[] = ['merchant_id', '=', session('admin')['merchant_id']];
 
         // 获取总数
         $total = BrandService::BrandTotal($where);
@@ -166,6 +172,9 @@ class Brand extends Common
 
         // 开始处理
         $params = input();
+
+        $params['merchant_id'] = session('admin')['merchant_id'];
+
         return BrandService::BrandSave($params);
 	}
 
