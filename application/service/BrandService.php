@@ -552,5 +552,24 @@ class BrandService
         }
         return DataReturn('删除失败', -100);
     }
+
+    /**
+     * 获取商户所属品牌id集合
+     * @param int $merchant_id
+     * @return array
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
+     */
+    public static function getBrandIdsByMerchantId(int $merchant_id)
+    {
+        $return = [];
+//        $data = Db::name('Brand')->where(['merchant_id' => $merchant_id])->field('id')->select();
+        $data = Db::name('Brand')->where(['merchant_id' => $merchant_id])->column('id');
+        foreach ($data as $value) {
+            $return[] = (int) $value;
+        }
+        return $return;
+    }
 }
 ?>
