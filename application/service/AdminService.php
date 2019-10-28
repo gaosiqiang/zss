@@ -440,6 +440,9 @@ class AdminService
         {
             return DataReturn('管理员不存在', -2);
         }
+        //获取管理员所属商户id
+        $merchant_admin = (new MerchantService())->getMerchantByAdminId($admin['id']);
+        $admin['merchant_id'] = isset($merchant_admin['data']['merchant_id']) ? $merchant_admin['data']['merchant_id'] : 0;
 
         // 校验成功
         // session存储

@@ -122,7 +122,7 @@ class Common extends Controller
 	 */
 	protected function IsLogin()
 	{
-		if(session('admin') === null)
+		if(session('admin') === null || !isset(session('admin')['merchant_id']))
 		{
 		    $login_info =  $this->ExLogin();
 			if ($login_info == 0) {
