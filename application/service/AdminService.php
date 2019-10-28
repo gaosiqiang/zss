@@ -420,5 +420,55 @@ class AdminService
         session('admin', null);
         return DataReturn('登录失败，请稍后再试！', -100);
     }
+
+    /**
+     * 管理员登录 from 商城登入
+     * @author   Devil
+     * @blog     http://gong.gg/
+     * @version  0.0.1
+     * @datetime 2016-12-10T22:16:29+0800
+     * @user_email    []          $params [输入参数]
+     */
+    public static function ExLoginByUserEmail($user_email)
+    {
+        if (!$user_email) {
+            return DataReturn('参数错误', -1);
+        }
+        // 获取管理员
+        $admin = Db::name('Admin')->field('id,username,user_email,login_pwd,login_salt,mobile,login_total,role_id')->where(['user_email' => $user_email])->find();
+        if(empty($admin))
+        {
+            return DataReturn('管理员不存在', -2);
+        }
+
+        // 校验成功
+        // session存储
+        session('admin', $admin);
+
+        // 返回数据,更新数据库
+        if(session('admin') != null)
+        {
+            $login_salt = GetNumberCode(6);
+            $data = array(
+                'login_salt'    =>  $login_salt,
+                'login_pwd'     =>  LoginPwdEncryption($user_email, $login_salt),
+                'login_total'   =>  $admin['login_total']+1,
+                'login_time'    =>  time(),
+            );
+            if(Db::name('Admin')->where(['id'=>$admin['id']])->update($data))
+            {
+                // 清空权限缓存数据
+                cache(config('cache_admin_left_menu_key').$admin['id'], null);
+                cache(config('cache_admin_power_key').$admin['id'], null);
+
+                return DataReturn('登录成功');
+            }
+        }
+
+        // 失败
+        session('admin', null);
+        return DataReturn('登录失败，请稍后再试！', -100);
+    }
+
 }
 ?>
