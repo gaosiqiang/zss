@@ -17,7 +17,7 @@ return [
     // 应用名称
     'app_name'               => '',
     // 应用地址
-    'app_host'               => '',
+    'app_host'               => 'http://testshopxo.com',
     // 应用调试模式
     'app_debug'              => false,
     // 应用Trace

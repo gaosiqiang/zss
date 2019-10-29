@@ -38,4 +38,48 @@ class MerchantService
         return ['code' => 0, 'msg' => 'access', 'data' => $merchant_admin];
     }
 
+    /**
+     * 创建商户
+     * @param array $data
+     * @return array
+     */
+    public function createMerchant(array $data)
+    {
+        if (!$data) {
+            return ['code' => -1, 'msg' => 'param error' , 'data' => []];
+        }
+        //创建商户
+        $merchant_id = Db::name('merchant')->insertGetId([
+            'name' => isset($data['merchant_name']) ? $data['merchant_name'] : '',
+            'address' => isset($data['merchant_address']) ? $data['merchant_address'] : '',
+            'merchant_status' => 0,
+            'status' => 0,
+            'level' => isset($data['merchant_level']) ? (int)$data['merchant_level'] : 0,
+            'update_by' => isset($data['admin_id']) ? (int)$data['admin_id'] : 0,
+            'update_time' => time(),
+            'create_by' => isset($data['admin_id']) ? (int)$data['admin_id'] : 0,
+            'create_time' => time(),
+        ]);
+        if (!$merchant_id) {
+            return ['code' => -2, 'msg' => 'create1 error' , 'data' => []];
+        }
+        //创建merchant_admin数据
+        $insert_merhant_admin_data = [
+            'merchant_id' => (int)$merchant_id,
+            'admin_id' => isset($data['admin_id']) ? (int)$data['admin_id'] : 0,
+            'rules' => isset($data['admin_rules']) ? (int)$data['admin_rules'] : 0,
+            'admin_status' => 0,
+            'level' => isset($data['admin_level']) ? (int)$data['admin_level'] : 0,
+            'update_by' => isset($data['admin_id']) ? (int)$data['admin_id'] : 0,
+            'update_time' => time(),
+            'create_by' => isset($data['admin_id']) ? (int)$data['admin_id'] : 0,
+            'create_time' => time(),
+        ];
+        $merchant_admin_id = Db::name('merchant_admin')->insertGetId($insert_merhant_admin_data);
+        if (!$merchant_admin_id) {
+            return ['code' => -3, 'msg' => 'create2 error' , 'data' => []];
+        }
+        return ['code' => 0, 'msg' => 'access', 'data' => ['merchant_id' => $merchant_id, 'admin_id' => $data['admin_id']]];
+    }
+
 }

@@ -1473,6 +1473,7 @@ class OrderService
     {
         $goods_ids = GoodsService::getGoodsIdsByMerchantId($merchant_id);
         $data = Db::name('order_detail')->where('goods_id', 'in', $goods_ids)->column('order_id');
+        $return = [];
         foreach ($data as $value) {
             $return[] = (int) $value;
         }

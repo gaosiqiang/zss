@@ -438,7 +438,41 @@ class AdminService
         $admin = Db::name('Admin')->field('id,username,user_email,login_pwd,login_salt,mobile,login_total,role_id')->where(['user_email' => $user_email])->find();
         if(empty($admin))
         {
-            return DataReturn('管理员不存在', -2);
+            //return DataReturn('管理员不存在', -2);
+            $admin = [
+                'username' => '',
+                'user_email' => $user_email,
+                'login_pwd' => md5(time()),
+                'login_salt' => rand(6,6),
+                'mobile' => '',
+                'gender' => 0,
+                'login_total' => 0,
+                'login_time' => time(),
+                'role_id' => 14,
+                'type' => 1,
+                'merchant_id' => 0,
+                'add_time' => time(),
+                'upd_time' => time(),
+            ];
+            $admin_id = Db::name('Admin')->insertGetId($admin);
+            if (!$admin_id) {
+                return DataReturn('开店失败1，请联系管理员：18813131734', -2);
+            }
+            $admin['id'] = $admin_id;
+            //创建商户
+            $merchant = (new MerchantService())->createMerchant([
+                'merchant_name' => '',
+                'merchant_address' => '',
+                'merchant_level' => 1,
+                'admin_id' => $admin['id'],
+                'admin_rules' => $admin['role_id'],
+                'admin_status' => 0,
+                'admin_level' => 0,
+            ]);
+            //var_dump($merchant);die();
+            if ($merchant['code'] != 0) {
+                return DataReturn('开店失败2，请联系管理员：18813131734', -2);
+            }
         }
         //获取管理员所属商户id
         $merchant_admin = (new MerchantService())->getMerchantByAdminId($admin['id']);
