@@ -59,6 +59,10 @@ class Goods extends Common
 		// 条件
 		$where = GoodsService::GetAdminIndexWhere($params);
 
+		//获取该商户所有品牌id集合
+		$brand_ids = BrandService::getBrandIdsByMerchantId(intval(session('admin')['merchant_id']));
+        $where[] = ['brand_id', 'in', $brand_ids];
+
 		// 总数
 		$total = GoodsService::GoodsTotal($where);
 

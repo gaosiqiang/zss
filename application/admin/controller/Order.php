@@ -62,6 +62,11 @@ class Order extends Common
         // 条件
         $where = OrderService::OrderListWhere($params);
 
+        //商户订单数据约束
+        $order_ids = OrderService::getOrderIdsByMerchantId(intval(session('admin')['merchant_id']));
+        //添加条件
+        $where[] = ['id', 'in', $order_ids];
+
         // 获取总数
         $total = OrderService::OrderTotal($where);
 

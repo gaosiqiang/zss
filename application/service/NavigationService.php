@@ -507,7 +507,7 @@ class NavigationService
         // 列表
         $data = [
             [
-                'name'      => '个人中心',
+                'name'      => '我的中书省',//个人中心
                 'is_login'  => 1,
                 'badge'     => null,
                 'icon'      => 'am-icon-user',
@@ -519,12 +519,12 @@ class NavigationService
                 'is_login'  => 1,
                 'badge'     => null,
                 'icon'      => 'am-icon-cube',
-                'url'       => '',
+                'url'       => 'shop.php',//原来为空
                 'items'     => [
-                    [
-                        'name'  => '我的订单',
-                        'url'   => MyUrl('index/order/index'),
-                    ],
+//                    [
+//                        'name'  => '我的订单',
+//                        'url'   => MyUrl('index/order/index'),
+//                    ],
                 ],
             ],
             [
@@ -540,14 +540,14 @@ class NavigationService
                     ],
                 ],
             ],
-            [
-                'name'      => '购物车',
-                'is_login'  => 1,
-                'badge'     => $common_cart_total,
-                'icon'      => 'am-icon-shopping-cart',
-                'url'       => MyUrl('index/cart/index'),
-                'items'     => [],
-            ],
+//            [//关闭购物车
+//                'name'      => '购物车',
+//                'is_login'  => 1,
+//                'badge'     => $common_cart_total,
+//                'icon'      => 'am-icon-shopping-cart',
+//                'url'       => MyUrl('index/cart/index'),
+//                'items'     => [],
+//            ],
             [
                 'name'      => '消息',
                 'is_login'  => 1,
@@ -645,22 +645,22 @@ class NavigationService
                 'url'       =>  MyUrl('index/safety/loginpwdinfo'),
                 'type'      =>  'loginpwd',
             ],
-            [
-                'title'     =>  '手机号码',
-                'no_msg'    =>  '您还没有绑定手机号码',
-                'ok_msg'    =>  '已绑定手机 #accounts#',
-                'tips'      =>  '可用于登录，密码找回，账户安全管理校验，接受账户提醒通知。',
-                'url'       =>  MyUrl('index/safety/mobileinfo'),
-                'type'      =>  'mobile',
-            ],
-            [
-                'title'     =>  '电子邮箱',
-                'no_msg'    =>  '您还没有绑定电子邮箱',
-                'ok_msg'    =>  '已绑定电子邮箱 #accounts#',
-                'tips'      =>  '可用于登录，密码找回，账户安全管理校验，接受账户提醒邮件。',
-                'url'       =>  MyUrl('index/safety/emailinfo'),
-                'type'      =>  'email',
-            ],
+//            [
+//                'title'     =>  '手机号码',
+//                'no_msg'    =>  '您还没有绑定手机号码',
+//                'ok_msg'    =>  '已绑定手机 #accounts#',
+//                'tips'      =>  '可用于登录，密码找回，账户安全管理校验，接受账户提醒通知。',
+//                'url'       =>  MyUrl('index/safety/mobileinfo'),
+//                'type'      =>  'mobile',
+//            ],
+//            [
+//                'title'     =>  '电子邮箱',
+//                'no_msg'    =>  '您还没有绑定电子邮箱',
+//                'ok_msg'    =>  '已绑定电子邮箱 #accounts#',
+//                'tips'      =>  '可用于登录，密码找回，账户安全管理校验，接受账户提醒邮件。',
+//                'url'       =>  MyUrl('index/safety/emailinfo'),
+//                'type'      =>  'email',
+//            ],
         ];
 
         // 用户安全项列表钩子
@@ -736,22 +736,22 @@ class NavigationService
                     ],
                 ]
             ],
-            'property' => [
-                'name'      =>  '财产中心',
-                'is_show'   =>  1,
-                'icon'      =>  'am-icon-trophy',
-                'is_system' =>  1,
-                'item'      =>  [
-                    [
-                        'name'      =>  '我的积分',
-                        'url'       =>  MyUrl('index/userintegral/index'),
-                        'contains'  =>  ['userintegralindex'],
-                        'is_show'   =>  1,
-                        'icon'      =>  'am-icon-fire',
-                        'is_system' =>  1,
-                    ],
-                ]
-            ],
+//            'property' => [
+//                'name'      =>  '财产中心',
+//                'is_show'   =>  1,
+//                'icon'      =>  'am-icon-trophy',
+//                'is_system' =>  1,
+//                'item'      =>  [
+//                    [
+//                        'name'      =>  '我的积分',
+//                        'url'       =>  MyUrl('index/userintegral/index'),
+//                        'contains'  =>  ['userintegralindex'],
+//                        'is_show'   =>  1,
+//                        'icon'      =>  'am-icon-fire',
+//                        'is_system' =>  1,
+//                    ],
+//                ]
+//            ],
             'base' => [
                 'name'      =>  '资料管理',
                 'is_show'   =>  1,
@@ -798,14 +798,14 @@ class NavigationService
                         'icon'      =>  'am-icon-lastfm',
                         'is_system' =>  1,
                     ],
-                    [
-                        'name'      =>  '问答/留言',
-                        'url'       =>  MyUrl('index/answer/index'),
-                        'contains'  =>  ['answerindex'],
-                        'is_show'   =>  1,
-                        'icon'      =>  'am-icon-question',
-                        'is_system' =>  1,
-                    ],
+//                    [
+//                        'name'      =>  '问答/留言',
+//                        'url'       =>  MyUrl('index/answer/index'),
+//                        'contains'  =>  ['answerindex'],
+//                        'is_show'   =>  1,
+//                        'icon'      =>  'am-icon-question',
+//                        'is_system' =>  1,
+//                    ],
                 ]
             ],
             'logout' => [

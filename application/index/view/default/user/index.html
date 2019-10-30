@@ -80,12 +80,12 @@
                             <p>我的足迹</p>
                         </a>
                     </li>
-                    <li>
-                        <a href="{{:MyUrl('index/userintegral/index')}}">
-                            <p>{{$user.integral}}</p>
-                            <p>我的积分</p>
-                        </a>
-                    </li>
+<!--                    <li>-->
+<!--                        <a href="{{:MyUrl('index/userintegral/index')}}">-->
+<!--                            <p>{{$user.integral}}</p>-->
+<!--                            <p>我的积分</p>-->
+<!--                        </a>-->
+<!--                    </li>-->
                 </ul>
             </div>
 
@@ -193,43 +193,83 @@
                 </div>
 
                 <!-- 购物车 -->
+<!--                <div class="am-u-md-4">-->
+<!--                    <div class="am-panel am-panel-default">-->
+<!--                        <div class="am-panel-hd">-->
+<!--                            <i></i>购物车-->
+<!--                            {{if !empty($cart_list)}}-->
+<!--                                <a class="am-fr more-tips" href="{{:MyUrl('index/cart/index')}}" target="_blank">-->
+<!--                                    更多 <span class="am-icon-angle-double-right"></span>-->
+<!--                                </a>-->
+<!--                            {{/if}}-->
+<!--                        </div>-->
+<!--                        <div class="am-panel-bd cart-list">-->
+<!--                            {{if !empty($cart_list)}}-->
+<!--                                {{foreach $cart_list as $key=>$goods}}-->
+<!--                                    {{if $key lt 3}}-->
+<!--                                        <div class="goods-detail">-->
+<!--                                            <a href="{{:MyUrl('index/goods/index', ['id'=>$goods['goods_id']])}}" target="_blank">-->
+<!--                                                <img src="{{$goods.images}}" alt="{{$goods.title}}" class="am-img-thumbnail am-radius" />-->
+<!--                                            </a>-->
+<!--                                            <div class="goods-base">-->
+<!--                                                <a href="{{:MyUrl('index/goods/index', ['id'=>$goods['goods_id']])}}" target="_blank" class="goods-title am-text-truncate">{{$goods.title}}</a>-->
+<!--                                                <ul>-->
+<!--                                                    <li>-->
+<!--                                                        <span class="line-price">￥{{$goods.price}}</span>-->
+<!--                                                        <span>x{{$goods.stock}}</span>-->
+<!--                                                    </li>-->
+<!--                                                </ul>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                    {{/if}}-->
+<!--                                {{/foreach}}-->
+<!--                            {{/if}}-->
+<!--                            {{if empty($cart_list)}}-->
+<!--                                <div class="table-no">-->
+<!--                                    <i class="am-icon-opencart am-icon-lg block"></i>-->
+<!--                                    <p class="tips-name">您的购物车还是空的</p>-->
+<!--                                    <p class="tips-msg">将想买的商品放进购物车，一起结算更轻松</p>-->
+<!--                                </div>-->
+<!--                            {{/if}}-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+
+
+                <!-- 我的足迹 -->
+                <!-- 购物车 -->
                 <div class="am-u-md-4">
                     <div class="am-panel am-panel-default">
                         <div class="am-panel-hd">
-                            <i></i>购物车
-                            {{if !empty($cart_list)}}
-                                <a class="am-fr more-tips" href="{{:MyUrl('index/cart/index')}}" target="_blank">
-                                    更多 <span class="am-icon-angle-double-right"></span>
-                                </a>
+                            <i></i>我的足迹
+                            {{if !empty($goods_browse_list)}}
+                            <a class="am-fr more-tips" href="{{:MyUrl('index/usergoodsbrowse/index')}}" target="_blank">
+                                更多 <span class="am-icon-angle-double-right"></span>
+                            </a>
                             {{/if}}
                         </div>
                         <div class="am-panel-bd cart-list">
-                            {{if !empty($cart_list)}}
-                                {{foreach $cart_list as $key=>$goods}}
-                                    {{if $key lt 3}}
-                                        <div class="goods-detail">
-                                            <a href="{{:MyUrl('index/goods/index', ['id'=>$goods['goods_id']])}}" target="_blank">
-                                                <img src="{{$goods.images}}" alt="{{$goods.title}}" class="am-img-thumbnail am-radius" />
-                                            </a>
-                                            <div class="goods-base">
-                                                <a href="{{:MyUrl('index/goods/index', ['id'=>$goods['goods_id']])}}" target="_blank" class="goods-title am-text-truncate">{{$goods.title}}</a>
-                                                <ul>
-                                                    <li>
-                                                        <span class="line-price">￥{{$goods.price}}</span>
-                                                        <span>x{{$goods.stock}}</span>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    {{/if}}
-                                {{/foreach}}
-                            {{/if}}
-                            {{if empty($cart_list)}}
-                                <div class="table-no">
-                                    <i class="am-icon-opencart am-icon-lg block"></i>
-                                    <p class="tips-name">您的购物车还是空的</p>
-                                    <p class="tips-msg">将想买的商品放进购物车，一起结算更轻松</p>
+                            {{if !empty($goods_browse_list)}}
+                            <ul data-am-widget="gallery" class="am-gallery am-avg-sm-3 am-avg-md-3 am-avg-lg-3 am-gallery-default data-am-gallery="{}">
+                            {{foreach $goods_browse_list as $goods}}
+                            <li>
+                                <div class="am-gallery-item">
+                                    <a href="{{:MyUrl('index/goods/index', ['id'=>$goods['goods_id']])}}" target="_blank">
+                                        <img src="{{$goods.images}}" alt="{{$goods.title}}" class="am-img-thumbnail am-circle" />
+                                        <h3 class="am-gallery-title">{{$goods.title}}</h3>
+                                    </a>
+                                    <div class="am-gallery-desc line-price">￥{{$goods.min_price}}</div>
                                 </div>
+                            </li>
+                            {{/foreach}}
+                            </ul>
+                            {{/if}}
+                            {{if empty($goods_browse_list)}}
+                            <div class="table-no">
+                                <i class="am-icon-lastfm am-icon-lg block"></i>
+                                <p class="tips-name">您的商品浏览记录为空</p>
+                                <p class="tips-msg">赶紧去商城看看促销活动吧</p>
+                            </div>
                             {{/if}}
                         </div>
                     </div>
@@ -273,43 +313,48 @@
                     </div>
                 </div>
 
-                <!-- 浏览足迹 -->
+                <!-- 浏览足迹 move 移动到原购物车位置，该模块置空 -->
+<!--                <div class="am-u-md-4">-->
+<!--                    <div class="am-panel am-panel-default">-->
+<!--                        <div class="am-panel-hd">-->
+<!--                            <i></i>我的足迹-->
+<!--                            {{if !empty($goods_browse_list)}}-->
+<!--                                <a class="am-fr more-tips" href="{{:MyUrl('index/usergoodsbrowse/index')}}" target="_blank">-->
+<!--                                    更多 <span class="am-icon-angle-double-right"></span>-->
+<!--                                </a>-->
+<!--                            {{/if}}-->
+<!--                        </div>-->
+<!--                        <div class="am-panel-bd goods-browse-list">-->
+<!--                            {{if !empty($goods_browse_list)}}-->
+<!--                                <ul data-am-widget="gallery" class="am-gallery am-avg-sm-3 am-avg-md-3 am-avg-lg-3 am-gallery-default data-am-gallery="{}">-->
+<!--                                    {{foreach $goods_browse_list as $goods}}-->
+<!--                                        <li>-->
+<!--                                            <div class="am-gallery-item">-->
+<!--                                                <a href="{{:MyUrl('index/goods/index', ['id'=>$goods['goods_id']])}}" target="_blank">-->
+<!--                                                    <img src="{{$goods.images}}" alt="{{$goods.title}}" class="am-img-thumbnail am-circle" />-->
+<!--                                                    <h3 class="am-gallery-title">{{$goods.title}}</h3>-->
+<!--                                                </a>-->
+<!--                                                <div class="am-gallery-desc line-price">￥{{$goods.min_price}}</div>-->
+<!--                                            </div>-->
+<!--                                        </li>-->
+<!--                                    {{/foreach}}-->
+<!--                                </ul>-->
+<!--                            {{/if}}-->
+<!--                            {{if empty($goods_browse_list)}}-->
+<!--                                <div class="table-no">-->
+<!--                                    <i class="am-icon-lastfm am-icon-lg block"></i>-->
+<!--                                    <p class="tips-name">您的商品浏览记录为空</p>-->
+<!--                                    <p class="tips-msg">赶紧去商城看看促销活动吧</p>-->
+<!--                                </div>-->
+<!--                            {{/if}}-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+
+                <!-- 我的足迹置空 -->
                 <div class="am-u-md-4">
-                    <div class="am-panel am-panel-default">
-                        <div class="am-panel-hd">
-                            <i></i>我的足迹
-                            {{if !empty($goods_browse_list)}}
-                                <a class="am-fr more-tips" href="{{:MyUrl('index/usergoodsbrowse/index')}}" target="_blank">
-                                    更多 <span class="am-icon-angle-double-right"></span>
-                                </a>
-                            {{/if}}
-                        </div>
-                        <div class="am-panel-bd goods-browse-list">
-                            {{if !empty($goods_browse_list)}}
-                                <ul data-am-widget="gallery" class="am-gallery am-avg-sm-3 am-avg-md-3 am-avg-lg-3 am-gallery-default data-am-gallery="{}">
-                                    {{foreach $goods_browse_list as $goods}}
-                                        <li>
-                                            <div class="am-gallery-item">
-                                                <a href="{{:MyUrl('index/goods/index', ['id'=>$goods['goods_id']])}}" target="_blank">
-                                                    <img src="{{$goods.images}}" alt="{{$goods.title}}" class="am-img-thumbnail am-circle" />
-                                                    <h3 class="am-gallery-title">{{$goods.title}}</h3>
-                                                </a>
-                                                <div class="am-gallery-desc line-price">￥{{$goods.min_price}}</div>
-                                            </div>
-                                        </li>
-                                    {{/foreach}}
-                                </ul>
-                            {{/if}}
-                            {{if empty($goods_browse_list)}}
-                                <div class="table-no">
-                                    <i class="am-icon-lastfm am-icon-lg block"></i>
-                                    <p class="tips-name">您的商品浏览记录为空</p>
-                                    <p class="tips-msg">赶紧去商城看看促销活动吧</p>
-                                </div>
-                            {{/if}}
-                        </div>
-                    </div>
                 </div>
+
             </div>
         </div>
     </div>

@@ -11,6 +11,7 @@
 namespace app\index\controller;
 
 use app\service\OrderAftersaleService;
+use app\service\OrderService;
 
 /**
  * 订单售后
@@ -57,6 +58,11 @@ class Orderaftersale extends Common
 
         // 条件
         $where = OrderAftersaleService::OrderAftersaleListWhere($params);
+
+        //商户订单数据约束
+        $order_ids = OrderService::getOrderIdsByMerchantId(intval(session('admin')['merchant_id']));
+        //添加条件
+        $where[] = ['order_id', 'in', $order_ids];
 
         // 获取总数
         $total = OrderAftersaleService::OrderAftersaleTotal($where);

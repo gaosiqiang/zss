@@ -10,10 +10,12 @@
 // +----------------------------------------------------------------------
 namespace app\admin\controller;
 
+use app\service\AdminService;
 use think\facade\Hook;
 use think\Controller;
 use app\service\AdminPowerService;
 use app\service\ConfigService;
+use app\service\UserService;
 
 /**
  * 管理员公共控制器
@@ -120,16 +122,35 @@ class Common extends Controller
 	 */
 	protected function IsLogin()
 	{
-		if(session('admin') === null)
+		if(session('admin') === null || !isset(session('admin')['merchant_id']))
 		{
-			if(IS_AJAX)
+		    $login_info =  $this->ExLogin();
+			if ($login_info == 0) {
+			    return;
+            }
+		    if(IS_AJAX)
 			{
 				exit(json_encode(DataReturn('登录失效，请重新登录', -400)));
 			} else {
-				die('<script type="text/javascript">if(self.frameElement && self.frameElement.tagName == "IFRAME"){parent.location.reload();}else{window.location.href="'.MyUrl('admin/admin/logininfo').'";}</script>');
+//				die('<script type="text/javascript">if(self.frameElement && self.frameElement.tagName == "IFRAME"){parent.location.reload();}else{window.location.href="'.MyUrl('admin/admin/logininfo').'";}</script>');
+//				die('<script type="text/javascript">alert("请联系管理员，'.$login_info['msg'].'");window.location.href = "index.php";</script>');
+				die('<script type="text/javascript">window.location.href = "shop.php";</script>');
 			}
 		}
+		return;
 	}
+
+    /**
+     * 商城系统和商户系统session联动联合登入
+     */
+	private function ExLogin()
+    {
+        if (isset($_SESSION[config()['session']['prefix']]['user']) && $_SESSION[config()['session']['prefix']]['user']) {
+            $user = UserService::UserInfo('id', $_SESSION[config()['session']['prefix']]['user']['id']);
+            return (new AdminService())->ExLoginByUserEmail($user['email']);
+        }
+        return ['code' => -1];
+    }
 
 	/**
 	 * [ViewInit 视图初始化]

@@ -17,7 +17,7 @@ return [
     // 应用名称
     'app_name'               => '',
     // 应用地址
-    'app_host'               => '',
+    'app_host'               => 'http://testshopxo.com',
     // 应用调试模式
     'app_debug'              => false,
     // 应用Trace
@@ -137,7 +137,8 @@ return [
     'exception_tmpl'         => Env::get('think_path') . 'tpl/think_exception.tpl',
 
     // 错误显示信息,非调试模式有效
-    'error_message'          => '系统出现错误、请联系管理员或到'.implode('', ['S','h','o','p','X','O']).'社区查阅~',
+//    'error_message'          => '系统出现错误、请联系管理员或到'.implode('', ['S','h','o','p','X','O']).'社区查阅~',
+    'error_message'          => '系统出现错误、请联系管理员~',
     // 显示错误信息
     'show_error_msg'         => false,
     // 异常处理handle类 留空使用 \think\exception\Handle

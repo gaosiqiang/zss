@@ -277,7 +277,8 @@ class Admin extends Common
 	public function Logout()
 	{
 		session_destroy();
-		return redirect(MyUrl('admin/admin/logininfo'));
+//		return redirect(MyUrl('admin/admin/logininfo'));
+		return redirect(config('app')['app_host']);
 	}
 }
 ?>

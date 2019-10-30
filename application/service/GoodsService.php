@@ -2356,5 +2356,26 @@ class GoodsService
 
         return DataReturn('获取成功', 0, $data);
     }
+
+    /**
+     * 获取商户所属商品id集合
+     * @param int $merchant_id
+     * @return array
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
+     */
+    public static function getGoodsIdsByMerchantId(int $merchant_id)
+    {
+        $return = [];
+        //获取品牌id集合
+        $brand_ids = BrandService::getBrandIdsByMerchantId($merchant_id);
+        $data = Db::name('goods')->where('brand_id', 'in', $brand_ids)->column('id');
+        foreach ($data as $value) {
+            $return[] = (int) $value;
+        }
+        return $return;
+    }
+
 }
 ?>

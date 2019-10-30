@@ -298,6 +298,13 @@ class BrandService
                 'is_checked'        => 1,
                 'error_msg'         => 'SEO描述格式 最多230个字符',
             ],
+            [
+                'checked_type'      => 'length',
+                'key_name'          => 'merchant_id',
+                'checked_data'      => '11',
+                'is_checked'        => 1,
+                'error_msg'         => '商户id，最多11位',
+            ],
         ];
         $ret = ParamsChecked($params, $p);
         if($ret !== true)
@@ -320,6 +327,7 @@ class BrandService
             'seo_title'         => empty($params['seo_title']) ? '' : $params['seo_title'],
             'seo_keywords'      => empty($params['seo_keywords']) ? '' : $params['seo_keywords'],
             'seo_desc'          => empty($params['seo_desc']) ? '' : $params['seo_desc'],
+            'merchant_id'       => empty($params['merchant_id']) ? 0 : $params['merchant_id'],
         ];
 
         // 品牌保存处理钩子
@@ -543,6 +551,25 @@ class BrandService
             return DataReturn('删除成功', 0);
         }
         return DataReturn('删除失败', -100);
+    }
+
+    /**
+     * 获取商户所属品牌id集合
+     * @param int $merchant_id
+     * @return array
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
+     */
+    public static function getBrandIdsByMerchantId(int $merchant_id)
+    {
+        $return = [];
+//        $data = Db::name('Brand')->where(['merchant_id' => $merchant_id])->field('id')->select();
+        $data = Db::name('Brand')->where(['merchant_id' => $merchant_id])->column('id');
+        foreach ($data as $value) {
+            $return[] = (int) $value;
+        }
+        return $return;
     }
 }
 ?>
