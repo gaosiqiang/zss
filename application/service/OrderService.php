@@ -952,6 +952,12 @@ class OrderService
      */
     public static function OrderDelivery($params = [])
     {
+        //初步校验参数
+        if (!isset($params['value'])) {
+            return DataReturn('用户id错误', -1);
+        }
+        $params['user_id'] = $params['value'];
+        unset($params['value']);
         // 请求参数
         $p = [
             [
@@ -964,16 +970,16 @@ class OrderService
                 'key_name'          => 'user_id',
                 'error_msg'         => '用户id有误',
             ],
-            [
-                'checked_type'      => 'empty',
-                'key_name'          => 'express_id',
-                'error_msg'         => '快递id有误',
-            ],
-            [
-                'checked_type'      => 'empty',
-                'key_name'          => 'express_number',
-                'error_msg'         => '快递单号有误',
-            ],
+//            [
+//                'checked_type'      => 'empty',
+//                'key_name'          => 'express_id',
+//                'error_msg'         => '快递id有误',
+//            ],
+//            [
+//                'checked_type'      => 'empty',
+//                'key_name'          => 'express_number',
+//                'error_msg'         => '快递单号有误',
+//            ],
         ];
         $ret = ParamsChecked($params, $p);
         if($ret !== true)
@@ -998,8 +1004,10 @@ class OrderService
         Db::startTrans();
         $upd_data = [
             'status'            => 3,
-            'express_id'        => intval($params['express_id']),
-            'express_number'    => isset($params['express_number']) ? $params['express_number'] : '',
+            //'express_id'        => intval($params['express_id']),
+            'express_id'        => 0,
+            //'express_number'    => isset($params['express_number']) ? $params['express_number'] : '',
+            'express_number'    => '',
             'delivery_time'     => time(),
             'upd_time'          => time(),
         ];
