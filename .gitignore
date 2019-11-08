@@ -10,3 +10,4 @@
 .idea
 .runtime/
 .public/static/
+.config/
