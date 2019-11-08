@@ -753,11 +753,11 @@ class BuyService
                 'key_name'          => 'user',
                 'error_msg'         => '用户信息有误',
             ],
-            [
-                'checked_type'      => 'empty',
-                'key_name'          => 'address_id',
-                'error_msg'         => '地址有误',
-            ],
+//            [
+//                'checked_type'      => 'empty',
+//                'key_name'          => 'address_id',
+//                'error_msg'         => '地址有误',
+//            ],
         ];
         if(MyC('common_order_is_booking', 0) != 1)
         {
@@ -796,7 +796,17 @@ class BuyService
         // 收货地址
         if(empty($buy['data']['base']['address']))
         {
-            return DataReturn('收货地址有误', -1);
+            //return DataReturn('收货地址有误', -1);
+            //关闭收货地址功能，初始化默认数据
+            $address = [
+                'id' => 0,
+                'name' => '',
+                'tel' => '',
+                'province' => 0,
+                'city' => 0,
+                'county' => 0,
+                'address' => '',
+            ];
         } else {
             $address = $buy['data']['base']['address'];
         }
