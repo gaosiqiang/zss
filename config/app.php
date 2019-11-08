@@ -17,7 +17,7 @@ return [
     // 应用名称
     'app_name'               => '',
     // 应用地址
-    'app_host'               => 'http://testshopxo.com',
+    'app_host'               => parse_url($_SERVER['HTTP_REFERER'])['scheme'].'://'.parse_url($_SERVER['HTTP_REFERER'])['host'],//动态获取应用当前host
     // 应用调试模式
     'app_debug'              => false,
     // 应用Trace
