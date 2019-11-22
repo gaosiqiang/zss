@@ -507,7 +507,7 @@ class NavigationService
         // 列表
         $data = [
             [
-                'name'      => '我的中书省',//个人中心
+                'name'      => '个人中心',
                 'is_login'  => 1,
                 'badge'     => null,
                 'icon'      => 'am-icon-user',
@@ -515,14 +515,14 @@ class NavigationService
                 'items'     => [],
             ],
             [
-                'name'      => '我的商城',
+                'name'      => '我是内容创作者',
                 'is_login'  => 1,
                 'badge'     => null,
                 'icon'      => 'am-icon-cube',
                 'url'       => 'shop.php',//原来为空
                 'items'     => [
 //                    [
-//                        'name'  => '我的订单',
+//                        'name'  => '我的订单',//二级菜单栏数据
 //                        'url'   => MyUrl('index/order/index'),
 //                    ],
                 ],

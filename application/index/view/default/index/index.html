@@ -39,53 +39,53 @@
 
     <!-- 轮播-聚合内容 -->
     <div class="banner-mixed">
-        <div class="mod-vip">
-            <div class="m-baseinfo">
-                <a href="{{if !empty($user)}}{{:MyUrl('index/user/index')}}{{else /}}javascript:;{{/if}}" target="_blank">
-                    <img src="{{if !empty($user['avatar'])}}{{$user.avatar}}{{else /}}{{$attachment_host}}/static/{{$module_name}}/{{$default_theme}}/images/default-user-avatar.jpg{{/if}}" class="user-avatar" />
-                </a>
-                <em>
-                    <span class="s-name">
-                        {{if !empty($user)}}
-                            <em>Hi,</em>
-                            {{if !empty($user['icon'])}}
-                                <img src="{{$user.icon}}" class="common-user-icon" {{if !empty($user['icon_title'])}}title="{{$user.icon_title}}"{{/if}} />
-                            {{/if}}
-                            <em>{{$user.user_name_view}}</em>
-                        {{else /}}
-                            <em>您好，欢迎来到</em>
-                            <em>{{:MyC('home_site_name')}}</em>
-                        {{/if}}
-                    </span>
-                </em>
-                {{if !empty($user)}}
-                    <a href="{{:MyUrl('index/user/logout')}}" class="member-logout">退出</a>
-                {{/if}}
-            </div>
-            {{if empty($user) and (MyC('home_user_login_state') eq 1 or in_array('sms', MyC('home_user_reg_state')) or in_array('email', MyC('home_user_reg_state')))}}
-                <div class="member-login">
-                    {{if MyC('home_user_login_state') eq 1}}
-                        <a class="am-btn-primary btn am-fl" href="{{:MyUrl('index/user/loginInfo')}}">登录</a>
-                    {{/if}}
-                    {{if in_array('sms', MyC('home_user_reg_state')) or in_array('email', MyC('home_user_reg_state')) or in_array('username', MyC('home_user_reg_state'))}}
-                        <a class="am-btn-primary btn am-fr" href="{{:MyUrl('index/user/regInfo')}}">注册</a>
-                    {{/if}}
-                </div>
-            {{/if}}
-            {{if !empty($user)}}
-                <div class="member-center">
-                    {{if !empty($user_order_status)}}
-                        {{foreach $user_order_status as $v}}
-                            {{if in_array($v['status'], [1,2,3])}}
-                                <a href="{{:MyUrl('index/order/index', ['is_more'=>1, 'status'=>$v['status']])}}" target="_blank"><strong>{{$v.count}}</strong>{{$v.name}}</a>
-                            {{elseif in_array($v['status'], [100]) /}}
-                                <a href="{{:MyUrl('index/order/index', ['is_more'=>1, 'is_comments'=>0, 'status'=>4])}}" target="_blank"><strong>{{$v.count}}</strong>{{$v.name}}</a>
-                            {{/if}}
-                        {{/foreach}}
-                    {{/if}}
-                </div>
-            {{/if}}
-        </div>
+<!--        <div class="mod-vip">-->
+<!--            <div class="m-baseinfo">-->
+<!--                <a href="{{if !empty($user)}}{{:MyUrl('index/user/index')}}{{else /}}javascript:;{{/if}}" target="_blank">-->
+<!--                    <img src="{{if !empty($user['avatar'])}}{{$user.avatar}}{{else /}}{{$attachment_host}}/static/{{$module_name}}/{{$default_theme}}/images/default-user-avatar.jpg{{/if}}" class="user-avatar" />-->
+<!--                </a>-->
+<!--                <em>-->
+<!--                    <span class="s-name">-->
+<!--                        {{if !empty($user)}}-->
+<!--                            <em>Hi,</em>-->
+<!--                            {{if !empty($user['icon'])}}-->
+<!--                                <img src="{{$user.icon}}" class="common-user-icon" {{if !empty($user['icon_title'])}}title="{{$user.icon_title}}"{{/if}} />-->
+<!--                            {{/if}}-->
+<!--                            <em>{{$user.user_name_view}}</em>-->
+<!--                        {{else /}}-->
+<!--                            <em>您好，欢迎来到</em>-->
+<!--                            <em>{{:MyC('home_site_name')}}</em>-->
+<!--                        {{/if}}-->
+<!--                    </span>-->
+<!--                </em>-->
+<!--                {{if !empty($user)}}-->
+<!--                    <a href="{{:MyUrl('index/user/logout')}}" class="member-logout">退出</a>-->
+<!--                {{/if}}-->
+<!--            </div>-->
+<!--            {{if empty($user) and (MyC('home_user_login_state') eq 1 or in_array('sms', MyC('home_user_reg_state')) or in_array('email', MyC('home_user_reg_state')))}}-->
+<!--                <div class="member-login">-->
+<!--                    {{if MyC('home_user_login_state') eq 1}}-->
+<!--                        <a class="am-btn-primary btn am-fl" href="{{:MyUrl('index/user/loginInfo')}}">登录</a>-->
+<!--                    {{/if}}-->
+<!--                    {{if in_array('sms', MyC('home_user_reg_state')) or in_array('email', MyC('home_user_reg_state')) or in_array('username', MyC('home_user_reg_state'))}}-->
+<!--                        <a class="am-btn-primary btn am-fr" href="{{:MyUrl('index/user/regInfo')}}">注册</a>-->
+<!--                    {{/if}}-->
+<!--                </div>-->
+<!--            {{/if}}-->
+<!--            {{if !empty($user)}}-->
+<!--                <div class="member-center">-->
+<!--                    {{if !empty($user_order_status)}}-->
+<!--                        {{foreach $user_order_status as $v}}-->
+<!--                            {{if in_array($v['status'], [1,2,3])}}-->
+<!--                                <a href="{{:MyUrl('index/order/index', ['is_more'=>1, 'status'=>$v['status']])}}" target="_blank"><strong>{{$v.count}}</strong>{{$v.name}}</a>-->
+<!--                            {{elseif in_array($v['status'], [100]) /}}-->
+<!--                                <a href="{{:MyUrl('index/order/index', ['is_more'=>1, 'is_comments'=>0, 'status'=>4])}}" target="_blank"><strong>{{$v.count}}</strong>{{$v.name}}</a>-->
+<!--                            {{/if}}-->
+<!--                        {{/foreach}}-->
+<!--                    {{/if}}-->
+<!--                </div>-->
+<!--            {{/if}}-->
+<!--        </div>-->
         {{if !empty($article_list)}}
             <div class="banner-news">
                 <p class="banner-news-title">服务中心</p>
